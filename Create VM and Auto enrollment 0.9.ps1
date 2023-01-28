@@ -11,7 +11,7 @@
 #
 ###########################################################################################
 Clear-host 
-$TenantId = "e91cdf8b-9248-4fc8-b057-0921ssji6aa53747" 
+$TenantId = "Blablabla" 
 $AppId = "Blablabla"
 $AppSecret = "Blablabla" 
 $clientId = "Blablabla"
