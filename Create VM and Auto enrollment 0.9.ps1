@@ -1,6 +1,6 @@
 ###########################################################################################
 #
-# PS used for create many VM's that will be Enrolled in MEM(forme Intune) Automatically
+# PS used for create many VM's that will be Enrolled in Intune Automatically
 #
 # Using App Registation in Azure
 # 
