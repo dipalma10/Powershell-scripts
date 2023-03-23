@@ -3,10 +3,7 @@
 
 Get all devices from group and select the once you want to remove
 
-.LINK 
-	.Author
-
-    Mikael Palmqvist, Gohybrid AB, 2023-03-22
+Mikael Palmqvist, Gohybrid AB, 2023-03-22
     Version 0.1
 
     Connect-AzureAD
