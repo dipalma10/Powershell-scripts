@@ -1,3 +1,13 @@
+<#
+.SYNOPSIS
+	This script performs inventory when user logon.
+.DESCRIPTION
+
+By Mikael Palmqvist, Gohybrid AB, 2022-03-19
+Version 1.3
+#>
+
+
 $PC_Inv_File = $env:TEMP + "\" + "PC-inventering-" + $Env:COMPUTERNAME + ".csv"
 $SourceFile = $PC_Inv_File
 #$TargetFile = "\\UNCPATH\Inventory$\Computers"
@@ -49,10 +59,10 @@ $env = $Env:Temp
             UserID = $samaccountname
             MailAddress = $mail
             IPAddress = Get-WmiObject Win32_NetworkAdapterConfiguration -Namespace "root\CIMV2" -ComputerName $Computer | where { $_.ipaddress -like "1*" } | select -ExpandProperty ipaddress | select -First 1
-            SerialNumber = gwmi win32_bios | Select –ExpandProperty SerialNumber
+            SerialNumber = gwmi win32_bios | Select â€“ExpandProperty SerialNumber
             OSVersion = Get-WmiObject Win32_OperatingSystem -ComputerName $Computer | Select-Object -ExpandProperty Caption 
-            OSInstalldate = gcim Win32_OperatingSystem | select –ExpandProperty InstallDate
-            BIOSVersion = gwmi win32_bios | Select –ExpandProperty SMBIOSBIOSVersion
+            OSInstalldate = gcim Win32_OperatingSystem | select â€“ExpandProperty InstallDate
+            BIOSVersion = gwmi win32_bios | Select â€“ExpandProperty SMBIOSBIOSVersion
             Workgroup = (Get-WmiObject -Class Win32_ComputerSystem).Workgroup
             Domain = (Get-WmiObject -Class Win32_ComputerSystem).Domain
         }
