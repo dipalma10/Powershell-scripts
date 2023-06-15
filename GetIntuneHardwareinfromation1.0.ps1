@@ -2,7 +2,7 @@
 .SYNOPSIS
 
     .DESCRIPTION
-    Get Intune devices and hwardware infromation in a csv file
+    Get Intune devices and hardware infromation in a csv file
     By Mikael Palmqvist, Gohhybrid AB, 2023-04-05
 
 
