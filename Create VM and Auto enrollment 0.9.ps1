@@ -28,9 +28,11 @@ Connect-MSGraph -ClientSecret $clientSecret 
   Object = [Char]8730
   ForegroundColor = 'green'
   NoNewLine = $true
-} $CountOfVM = "2"     $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList TheDude, (ConvertTo-SecureString "12345QW12345" -AsPlainText -Force)     function waitForPSDirect([string]$VMName, $cred){
+} $CountOfVM = "2"     $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList TheDude, (ConvertTo-SecureString "12345QW12345" -AsPlainText -Force)     
+function waitForPSDirect([string]$VMName, $cred){
     Write-Output "[$($VMName)]:: Waiting for PowerShell Direct (using $($cred.username))"
-    while ((icm -VMName $VMName -Credential $cred {"Test"} -ea SilentlyContinue) -ne "Test") {Sleep -Seconds 1}} 1..$CountOfVM | % {     $VMName = "MEMVM-VM-$_"     Write-Host "Create VM '$VMName' : ” -F Y -NoNewline
+    while ((icm -VMName $VMName -Credential $cred {"Test"} -ea SilentlyContinue) -ne "Test") {Sleep -Seconds 1}} 1..$CountOfVM | % {     $VMName = "MEMVM-VM-$_"     
+    Write-Host "Create VM '$VMName' : ” -F Y -NoNewline
     Start-Sleep -Seconds 1
     Write-Host @greenCheck
     Write-Host " (Done)" -F Y     New-VHD -Path "D:\ClusterStorage\Volume1\$VMName\$VMName.vhdx” -ParentPath "D:\ClusterStorage\Volume1\Hard Disk.vhdx" -Differencing | Out-Null
@@ -86,7 +88,7 @@ Connect-MSGraph -ClientSecret $clientSecret 
     Write-Host " (Done)" -f Y     #
     # Add Dummy GroupTag to be able to force a device sync. To be changed. Mijk 
     #
-    Invoke-Command -VMName $VMName -Credential $cred -ScriptBlock {Get-WindowsAutopilotInfo -Grouptag Dummy -Online -TenantId e91cdf8b-9248-4fc8-b057-09216aa53747 -AppId 48b49baf-16f4-45c1-9616-595fda1a4fb2 -AppSecret 4HE8Q~NUOkYQwnwQg2TM1Tk.W5kockyhHBKCCc.6} | Out-Null
+    Invoke-Command -VMName $VMName -Credential $cred -ScriptBlock {Get-WindowsAutopilotInfo -Grouptag Dummy -Online -TenantId $TenantId -AppId $AppId -AppSecret $AppSecret} | Out-Null
     Write-Host "Running 'Get-windowsautopilotinfo' on VM '$VMName' : ” -F Y -NoNewline
     Start-Sleep -Seconds 1
     Write-Host @greenCheck
@@ -106,7 +108,8 @@ Connect-MSGraph -ClientSecret $clientSecret 
         $authority = "https://login.microsoftonline.com/$ourTenantId"
         Update-MSGraphEnvironment -AppId $clientId -Quiet
         Update-MSGraphEnvironment -AuthUrl $authority -Quiet
-        Connect-MSGraph -ClientSecret $clientSecret     $ProfileStatus = Get-AutopilotDevice -serial $Ser | select deploymentProfileAssignmentStatus     Do
+        Connect-MSGraph -ClientSecret $clientSecret     
+	$ProfileStatus = Get-AutopilotDevice -serial $Ser | select deploymentProfileAssignmentStatus     Do
     {
     write-host "Wait for device with serial number -> '$ser' to be assigned a Autopilot Profile" -ForegroundColor Gray
     $ProfileStatus = Get-AutopilotDevice -serial $Ser | select deploymentProfileAssignmentStatus
