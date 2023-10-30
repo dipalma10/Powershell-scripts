@@ -31,7 +31,8 @@ Connect-MSGraph -ClientSecret $clientSecret 
 } $CountOfVM = "2"     $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList TheDude, (ConvertTo-SecureString "12345QW12345" -AsPlainText -Force)     
 function waitForPSDirect([string]$VMName, $cred){
     Write-Output "[$($VMName)]:: Waiting for PowerShell Direct (using $($cred.username))"
-    while ((icm -VMName $VMName -Credential $cred {"Test"} -ea SilentlyContinue) -ne "Test") {Sleep -Seconds 1}} 1..$CountOfVM | % {     $VMName = "MEMVM-VM-$_"     
+    while ((icm -VMName $VMName -Credential $cred {"Test"} -ea SilentlyContinue) -ne "Test") {Sleep -Seconds 1}} 1..$CountOfVM | % {     
+    $VMName = "MEMVM-VM-$_"     
     Write-Host "Create VM '$VMName' : ” -F Y -NoNewline
     Start-Sleep -Seconds 1
     Write-Host @greenCheck
