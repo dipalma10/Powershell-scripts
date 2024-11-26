@@ -4,7 +4,7 @@
 #
 # Using App Registation in Azure
 # 
-# Created by Mikael Palmqvist, Gohybrid AB, 2011-09-12
+# Created by Mikael Palmqvist, 2017-09-12
 #
 # Revision 0.9
 #
